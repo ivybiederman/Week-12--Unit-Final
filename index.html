@@ -1,25 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Metadata for character set and responsive design -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Title of the web page -->
     <title>Blog App</title>
+    <!-- Linking Bootstrap CSS for styling -->
     <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css">
 </head>
 <body class="container">
+    <!-- Creating a new blog -->
     <div id="new-blog" class="jumbotron">
+        <!-- Heading for the new blog section -->
         <h2>New Blog</h2>
+        <!-- Input field for the new blog title -->
         <input type="text" id="new-blog-title" class="form-control"> <br>
+        <!-- Text for the new blog content -->
         <textarea id="new-blog-content" class="form-control" placeholder="Blog Content"></textarea> <br>
+        <!-- Button to create a new blog -->
         <button id="create-new-blog" class="btn btn-primary form-control">Create</button>
     </div>
 
+    <!-- Container for displaying blogs -->
     <div id="app"></div>
 
+    <!-- Scripts for jQuery and Bootstrap -->
     <script src="node_modules/jquery/dist/jquery.min.js"></script>
     <script src="index.js"></script> 
     <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script>
     
+    <!-- Script to initiate the DOMManager and retrieve all blogs on document ready -->
     <script>
         $(document).ready(function() {
             DOMManager.getAllBlogs();

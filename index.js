@@ -27,11 +27,11 @@ class BlogService {
     }
 
     // Update an existing blog entry on the API
-    static updateBlog(blog) {
+    static updateBlog(id, updatedBlog) {
         return $.ajax({
-            url: `${this.url}/${blog.id}`,
+            url: `${this.url}/${id}`,
             dataType: 'json',
-            data: JSON.stringify(blog),
+            data: JSON.stringify(updatedBlog),
             contentType: 'application/json',
             type: 'PUT'
         });
@@ -84,6 +84,21 @@ class DOMManager {
             });
     }
 
+    // Edit a blog entry by ID and refresh the list in the DOM
+    static editBlog(id) {
+        const updatedContent = prompt("Enter the updated content:");
+        const updatedBlog = { content: updatedContent };
+
+        BlogService.updateBlog(id, updatedBlog)
+            .then(() => {
+                console.log(`Updated blog with ID: ${id}`);
+                this.getAllBlogs(); // Refresh the list after update
+            })
+            .catch(error => {
+                console.error(`Error updating blog with ID ${id}:`, error);
+            });
+    }
+
     // Render the blogs in the DOM
     static render(blogs) {
         this.blogs = blogs;
@@ -94,6 +109,7 @@ class DOMManager {
                 `<div id="${blog.id}" class="card">
                     <div class="card-header">
                         <h2>${blog.title}</h2>
+                        <button class="btn btn-warning" onclick="DOMManager.editBlog('${blog.id}')">Edit</button>
                         <button class="btn btn-danger" onclick="DOMManager.deleteBlog('${blog.id}')">Delete</button>
                     </div>
                     <div class="card-body">
